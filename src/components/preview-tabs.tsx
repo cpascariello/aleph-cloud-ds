@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ColorsTab } from "@ac/components/tabs/colors-tab";
 import { TypographyTab } from "@ac/components/tabs/typography-tab";
 import { SpacingTab } from "@ac/components/tabs/spacing-tab";
+import { EffectsTab } from "@ac/components/tabs/effects-tab";
 
 const TABS = ["Colors", "Typography", "Spacing", "Effects", "Icons"] as const;
 type Tab = (typeof TABS)[number];
@@ -43,15 +44,12 @@ function TabContent({ tab }: { tab: Tab }) {
     case "Spacing":
       return <SpacingTab />;
     case "Effects":
-      return <EffectsPlaceholder />;
+      return <EffectsTab />;
     case "Icons":
       return <IconsPlaceholder />;
   }
 }
 
-function EffectsPlaceholder() {
-  return <p className="text-muted-foreground">Effects tab — next task</p>;
-}
 function IconsPlaceholder() {
   return <p className="text-muted-foreground">Icons tab — next task</p>;
 }
