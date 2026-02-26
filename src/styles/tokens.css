@@ -1,0 +1,84 @@
+/* Layer 1: Brand colors via @theme */
+@theme {
+  --color-brand: oklch(0.372 0.254 285.48);
+  --color-brand-lime: oklch(0.929 0.228 121.30);
+
+  /* Gradients */
+  --gradient-main: linear-gradient(90deg, #141421 8.24%, #5100CD 71.81%);
+  --gradient-lime: linear-gradient(90deg, #D6FF00 27.88%, #F5F7DB 100%);
+  --gradient-success: linear-gradient(90deg, #36D846 0%, #63E570 100%);
+  --gradient-warning: linear-gradient(90deg, #FFE814 0%, #FBAE18 100%);
+  --gradient-error: linear-gradient(90deg, #FFAC89 0%, #DE3668 90.62%);
+  --gradient-info: linear-gradient(90deg, #C8ADF0 22.66%, #5100CD 244.27%);
+
+  /* Shadows */
+  --shadow-brand-sm: 0px 4px 4px oklch(0.372 0.254 285.48 / 0.15);
+  --shadow-brand: 0px 4px 24px oklch(0.372 0.254 285.48 / 0.15);
+  --shadow-brand-lg: 0px 4px 24px oklch(0.372 0.254 285.48 / 0.45);
+
+  /* Fonts */
+  --font-heading: "rigid-square", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Titillium Web", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, monospace;
+}
+
+/* Layer 2: Semantic tokens (CSS custom properties, per theme) */
+:root {
+  --background: #F9F4FF;
+  --foreground: #141421;
+  --primary: oklch(0.372 0.254 285.48);
+  --primary-foreground: #ffffff;
+  --accent: oklch(0.929 0.228 121.30);
+  --accent-foreground: #141421;
+  --muted: #F3E8FF;
+  --muted-foreground: #6B7280;
+  --card: #ffffff;
+  --card-foreground: #141421;
+  --border: #E9D5FF;
+  --border-hover: #D8B4FE;
+  --success: #36D846;
+  --warning: #FBAE18;
+  --error: #DE3668;
+
+  --duration-fast: 200ms;
+  --duration-normal: 500ms;
+  --duration-slow: 700ms;
+  --timing: ease-in-out;
+}
+
+.theme-dark {
+  --background: #141421;
+  --foreground: #F9F4FF;
+  --primary: oklch(0.472 0.254 285.48);
+  --primary-foreground: #ffffff;
+  --accent: oklch(0.929 0.228 121.30);
+  --accent-foreground: #141421;
+  --muted: #1E1E2E;
+  --muted-foreground: #9CA3AF;
+  --card: #1E1E2E;
+  --card-foreground: #F9F4FF;
+  --border: #2E2E3E;
+  --border-hover: #3E3E4E;
+  --success: #36D846;
+  --warning: #FBAE18;
+  --error: #DE3668;
+}
+
+/* Layer 3: Map semantic tokens to Tailwind utilities */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+}
