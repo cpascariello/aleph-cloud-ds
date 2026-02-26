@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ColorsTab } from "@ac/components/tabs/colors-tab";
+import { TypographyTab } from "@ac/components/tabs/typography-tab";
 
 const TABS = ["Colors", "Typography", "Spacing", "Effects", "Icons"] as const;
 type Tab = (typeof TABS)[number];
@@ -37,7 +38,7 @@ function TabContent({ tab }: { tab: Tab }) {
     case "Colors":
       return <ColorsTab />;
     case "Typography":
-      return <TypographyPlaceholder />;
+      return <TypographyTab />;
     case "Spacing":
       return <SpacingPlaceholder />;
     case "Effects":
@@ -47,9 +48,6 @@ function TabContent({ tab }: { tab: Tab }) {
   }
 }
 
-function TypographyPlaceholder() {
-  return <p className="text-muted-foreground">Typography tab — next task</p>;
-}
 function SpacingPlaceholder() {
   return <p className="text-muted-foreground">Spacing tab — next task</p>;
 }
