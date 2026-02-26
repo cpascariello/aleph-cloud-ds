@@ -33,12 +33,6 @@ Ideas and scope creep captured for later consideration.
 **Description:** Publish `@aleph-front/ds` to npm for consumption by other Aleph Cloud apps.
 **Priority:** Medium
 
-### 2026-02-26 — Typekit font integration
-
-**Source:** Task 3 implementation
-**Description:** Replace `YOUR_KIT_ID` placeholder in layout.tsx with actual Adobe Typekit kit ID for rigid-square font.
-**Priority:** High
-
 ### 2026-02-26 — CSS import alias
 
 **Source:** Task 11 build fix
@@ -52,6 +46,6 @@ Ideas and scope creep captured for later consideration.
 <details>
 <summary>Archived items</summary>
 
-<!-- Completed items moved here with checkmark and date -->
+- [x] 2026-02-26 — Typekit font integration (kit ID: `acb7qvn`)
 
 </details>
