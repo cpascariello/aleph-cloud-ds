@@ -33,12 +33,6 @@ Ideas and scope creep captured for later consideration.
 **Description:** Publish `@aleph-front/ds` to npm for consumption by other Aleph Cloud apps.
 **Priority:** Medium
 
-### 2026-02-26 — Install prek pre-commit hooks
-
-**Source:** Bootstrap implementation
-**Description:** Install prek (`prek install`) to add pre-commit hooks that run lint and typecheck before each commit. Prevents broken code from entering the project history.
-**Priority:** High
-
 
 ### 2026-02-26 — CSS import alias
 
