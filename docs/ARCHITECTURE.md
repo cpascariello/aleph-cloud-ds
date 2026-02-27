@@ -27,7 +27,7 @@ src/
 ├── components/
 │   ├── button/
 │   │   ├── button.tsx    # Button component (CVA variants)
-│   │   └── button.test.tsx
+│   │   └── button.test.tsx  # Behavior + accessibility tests
 │   ├── ui/
 │   │   └── spinner.tsx   # Animated loading spinner
 │   ├── preview-tabs.tsx  # Tab navigation
@@ -142,6 +142,35 @@ All source imports use the `@ac/*` prefix, resolved to `./src/*`.
 
 ---
 
+## Testing Philosophy
+
+**Test behavior and accessibility, not appearance.**
+
+Design system components are visual by nature — most of their code maps props to CSS classes. Testing those class names creates brittle tests that break on every visual redesign without catching real bugs. The preview app is the right place to verify appearance.
+
+**What to test:**
+
+| Category | Example | Why |
+|----------|---------|-----|
+| Interactive behavior | Loading state shows spinner, hides icons | Logic that can silently break |
+| Accessibility | `aria-busy` when loading, `disabled` attribute | Invisible to visual review |
+| Polymorphism | `asChild` renders an `<a>` instead of `<button>` | Non-obvious DOM behavior |
+| Prop forwarding | `aria-label`, `className` merging | Contract with consumers |
+| Structural layout | Icon renders before/after label | DOM ordering affects UX |
+
+**What NOT to test:**
+
+| Category | Example | Why |
+|----------|---------|-----|
+| CSS class names | "contains `bg-primary-600`" | Coupled to implementation, breaks on redesign |
+| Token values | "primary-500 is this OKLCH value" | Tokens are declarative — preview app is the test |
+| Browser APIs | `classList.toggle` works | Testing the platform, not your code |
+| Theme switching | Dark class toggles correctly | Too trivial; covered by manual preview |
+
+**Colocate tests** with components as `<name>.test.tsx`. Run with `pnpm test` (vitest).
+
+---
+
 ## Recipes
 
 ### Adding a New Semantic Token
@@ -163,7 +192,7 @@ All source imports use the `@ac/*` prefix, resolved to `./src/*`.
 
 1. Create `src/components/<name>/<name>.tsx` (or `src/components/ui/<name>.tsx` for primitives)
 2. Use CVA for variants, `cn()` for class merging, `forwardRef` for DOM access
-3. Colocate tests as `<name>.test.tsx` in the same directory
+3. Colocate tests as `<name>.test.tsx` — test behavior and accessibility only (see Testing Philosophy above)
 4. Export from the component file directly — no barrel `index.ts` files
 5. Add a showcase section in the relevant tab under `src/components/tabs/`
 6. Document usage in `docs/DESIGN-SYSTEM.md` § Components
