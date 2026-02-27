@@ -42,7 +42,7 @@ Ideas and scope creep captured for later consideration.
 ### 2026-02-26 — Package publishing
 
 **Source:** Design doc
-**Description:** Publish `@aleph-front/ds` to npm for consumption by other Aleph Cloud apps.
+**Description:** Publish `@aleph-front/ds` to npm. Monorepo structure is in place — needs tsup build step for compiled dist.
 **Priority:** Medium
 
 ---
@@ -56,5 +56,6 @@ Ideas and scope creep captured for later consideration.
 - [x] 2026-02-26 — Global CLAUDE.md: bundler moduleResolution for Next.js
 - [x] 2026-02-26 — Button component (CVA variants, OKLCH color scales, TDD)
 - [x] 2026-02-27 — Input, Textarea, FormField components (CVA, accessibility, TDD)
+- [x] 2026-02-27 — Monorepo + preview restructure (pnpm workspaces, sidebar + routes)
 
 </details>

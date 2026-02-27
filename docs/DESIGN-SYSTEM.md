@@ -2,25 +2,30 @@
 
 A design system built with Tailwind CSS 4 + CSS custom properties + OKLCH colors. Includes design tokens, fonts, reusable components, and a preview app.
 
-## Setup
+## Installation
 
-Import the global stylesheet in your root layout. All tokens are available as Tailwind utility classes.
+Install the DS package in your app:
 
-```tsx
-// src/app/layout.tsx
-import "./globals.css";
+```bash
+pnpm add @aleph-front/ds
 ```
 
-`globals.css` imports Tailwind, the token file, restricts content scanning to `src/`, and registers the `dark:` variant for class-based theming:
+Import tokens in your CSS and components via subpath exports:
 
 ```css
 @import "tailwindcss";
-@import "../styles/tokens.css";
-
-@source "../../src/**/*.{ts,tsx}";
+@import "@aleph-front/ds/styles/tokens.css";
 
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 ```
+
+```tsx
+import { Button } from "@aleph-front/ds/button";
+import { Input } from "@aleph-front/ds/input";
+import { cn } from "@aleph-front/ds/lib/cn";
+```
+
+Consumer apps need `transpilePackages: ["@aleph-front/ds"]` in their Next.js config (DS exports raw `.tsx` source).
 
 ## Themes
 
@@ -35,14 +40,6 @@ Toggle theme in JS:
 
 ```ts
 document.documentElement.classList.toggle("theme-dark");
-```
-
-Or use the built-in `ThemeSwitcher` component:
-
-```tsx
-import { ThemeSwitcher } from "@ac/components/theme-switcher";
-
-<ThemeSwitcher />
 ```
 
 ---
@@ -319,7 +316,7 @@ Size tokens for consistent icon sizing. No icon library included yet.
 
 ### Adding a New Semantic Token
 
-1. Add light value to `:root` block in `src/styles/tokens.css`
+1. Add light value to `:root` block in `packages/ds/src/styles/tokens.css`
 2. Add dark value to `.theme-dark` block
 3. Add Tailwind mapping in `@theme inline` block: `--color-my-token: var(--my-token);`
 4. Use as Tailwind class: `bg-my-token`, `text-my-token`, `border-my-token`
@@ -381,7 +378,7 @@ Size tokens for consistent icon sizing. No icon library included yet.
 CVA-based button with 6 variants, 4 sizes, icon slots, loading/disabled states, and `asChild` polymorphism.
 
 ```tsx
-import { Button } from "@ac/components/button/button";
+import { Button } from "@aleph-front/ds/button";
 ```
 
 **Visual style:** Pill shape (`rounded-full`), 3px border, `font-heading` at weight 700.
@@ -439,7 +436,7 @@ Renders button styles on a child element instead of `<button>`:
 #### Custom Composition with buttonVariants
 
 ```tsx
-import { buttonVariants } from "@ac/components/button/button";
+import { buttonVariants } from "@aleph-front/ds/button";
 
 <a href="/docs" className={buttonVariants({ variant: "outline", size: "sm" })}>
   Documentation
@@ -451,7 +448,7 @@ import { buttonVariants } from "@ac/components/button/button";
 Styled text input with CVA sizing and error state.
 
 ```tsx
-import { Input } from "@ac/components/input/input";
+import { Input } from "@aleph-front/ds/input";
 
 <Input size="md" placeholder="Enter text" />
 <Input size="sm" placeholder="Small" />
@@ -470,7 +467,7 @@ import { Input } from "@ac/components/input/input";
 Multi-line text input. Same API as Input, `rounded-2xl`, vertical resize.
 
 ```tsx
-import { Textarea } from "@ac/components/textarea/textarea";
+import { Textarea } from "@aleph-front/ds/textarea";
 
 <Textarea placeholder="Enter message" />
 <Textarea size="sm" rows={6} />
@@ -484,8 +481,8 @@ import { Textarea } from "@ac/components/textarea/textarea";
 Layout wrapper that wires label, helper text, and error message to a child input with proper accessibility attributes.
 
 ```tsx
-import { FormField } from "@ac/components/form-field/form-field";
-import { Input } from "@ac/components/input/input";
+import { FormField } from "@aleph-front/ds/form-field";
+import { Input } from "@aleph-front/ds/input";
 
 <FormField label="Email" required helperText="We'll never share it">
   <Input type="email" placeholder="you@example.com" />
@@ -505,7 +502,7 @@ import { Input } from "@ac/components/input/input";
 Animated loading indicator. Used internally by Button but available standalone.
 
 ```tsx
-import { Spinner } from "@ac/components/ui/spinner";
+import { Spinner } from "@aleph-front/ds/ui/spinner";
 
 <Spinner className="size-5 text-primary-600" />
 ```
@@ -514,7 +511,7 @@ import { Spinner } from "@ac/components/ui/spinner";
 
 ## Token File Reference
 
-All tokens live in `src/styles/tokens.css`. Three layers:
+All tokens live in `packages/ds/src/styles/tokens.css`. Three layers:
 
 | Layer | CSS construct | Purpose |
 |-------|--------------|---------|
@@ -522,21 +519,25 @@ All tokens live in `src/styles/tokens.css`. Three layers:
 | 2. Semantic | `:root { }` / `.theme-dark { }` | Purpose-driven tokens that swap per theme |
 | 3. Tailwind bridge | `@theme inline { }` | Maps semantic tokens to Tailwind's `--color-*` namespace |
 
-To modify tokens, edit `src/styles/tokens.css` directly. Changes propagate to all Tailwind classes automatically.
+To modify tokens, edit `packages/ds/src/styles/tokens.css` directly. Changes propagate to all Tailwind classes automatically.
 
 ---
 
 ## Preview App
 
-Run `pnpm dev` and visit http://localhost:3000. Six tabs:
+Run `pnpm dev` and visit http://localhost:3000. Sidebar navigation with route-per-page:
 
-| Tab | Content |
-|-----|---------|
-| Components | Button showcase, Input sizes/states, Textarea, FormField with label/error/helper |
-| Colors | OKLCH color scales (50–950), semantic tokens (theme-aware), borders |
-| Typography | Heading scale (Header–H7), body styles, font family specimens |
-| Spacing | Tailwind spacing scale, breakpoints table, border radius samples |
-| Effects | Shadow tokens, gradient swatches, transition speed demos (hover) |
-| Icons | Icon size tokens (placeholder for future icon library) |
+| Route | Content |
+|-------|---------|
+| `/` | Overview — foundation cards, component list |
+| `/foundations/colors` | OKLCH color scales (50–950), semantic tokens, borders |
+| `/foundations/typography` | Heading scale (Header–H7), body styles, font families |
+| `/foundations/spacing` | Spacing scale, breakpoints table, border radius |
+| `/foundations/effects` | Shadow tokens, gradient swatches, transition demos |
+| `/foundations/icons` | Icon size tokens |
+| `/components/button` | Variants, sizes, icons, loading, disabled, asChild |
+| `/components/input` | Sizes and states |
+| `/components/textarea` | Default, error, disabled |
+| `/components/form-field` | Label, helper text, error |
 
 Theme switcher in the sticky header toggles light/dark.

@@ -1,36 +1,14 @@
 {
-  "name": "@aleph-front/ds",
-  "version": "0.0.0",
+  "name": "aleph-cloud-ds",
+  "private": true,
   "type": "module",
-  "license": "MIT",
   "packageManager": "pnpm@10.29.2",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "lint": "oxlint --import-plugin src/",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "check": "pnpm lint && pnpm typecheck && pnpm test"
-  },
-  "dependencies": {
-    "class-variance-authority": "0.7.1",
-    "clsx": "2.1.1",
-    "next": "16.1.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "tailwind-merge": "3.5.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "4.2.1",
-    "@testing-library/react": "16.3.2",
-    "@types/jsdom": "28.0.0",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "5.1.4",
-    "jsdom": "28.1.0",
-    "oxlint": "1.50.0",
-    "tailwindcss": "4.2.1",
-    "typescript": "5.9.3",
-    "vitest": "4.0.18"
+    "dev": "pnpm --filter @aleph-front/preview dev",
+    "build": "pnpm --filter @aleph-front/preview build",
+    "test": "pnpm --filter @aleph-front/ds test",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "check": "pnpm -r check"
   }
 }

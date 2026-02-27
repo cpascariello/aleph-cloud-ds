@@ -1,7 +1,8 @@
 @import "tailwindcss";
-@import "../styles/tokens.css";
+@import "../../../../packages/ds/src/styles/tokens.css";
 
 @source "../../src/**/*.{ts,tsx}";
+@source "../../../../packages/ds/src/**/*.{ts,tsx}";
 
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 

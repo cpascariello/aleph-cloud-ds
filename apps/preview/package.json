@@ -1,0 +1,27 @@
+{
+  "name": "@aleph-front/preview",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "lint": "oxlint --import-plugin src/",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm lint && pnpm typecheck"
+  },
+  "dependencies": {
+    "@aleph-front/ds": "workspace:*",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "oxlint": "1.50.0",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3"
+  }
+}

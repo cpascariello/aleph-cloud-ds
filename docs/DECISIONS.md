@@ -18,6 +18,43 @@ Each entry includes:
 
 ---
 
+## Decision #23 — 2026-02-27
+
+**Context:** Preview app sidebar scrolls with page content instead of staying fixed.
+**Decision:** Use `h-screen` on the outer layout wrapper with `overflow-hidden` on the content flex container. Sidebar and main each scroll independently within a viewport-locked box.
+**Rationale:** `sticky` positioning failed because the parent flex container grows with page content — there's nothing to "stick" against. The fixed-height container approach keeps both panels in a viewport-sized box with independent overflow. No `sticky`/`position: fixed` needed.
+
+## Decision #22 — 2026-02-27
+
+**Context:** Color scale swatches on the preview colors page show no fill — just empty white boxes in both light and dark mode.
+**Decision:** Use a static lookup map of Tailwind `bg-{color}-{stop}` class names instead of inline `style={{ backgroundColor: 'var(--color-...)' }}`.
+**Rationale:** Tailwind CSS 4's `@theme` tree-shakes CSS custom properties not referenced by any utility class detected during source scanning. Inline `style` attributes with `var()` are invisible to the scanner, so the variables get pruned from the CSS output. Enumerating all class names in source code (even inside a data structure) is enough for the scanner to include them.
+
+## Decision #21 — 2026-02-27
+
+**Context:** Preview app typechecking fails because TypeScript follows DS source imports (via `transpilePackages`) and can't resolve the `@ac/*` alias used internally by DS components.
+**Decision:** Add `@ac/*` path alias to the preview app's `tsconfig.json`, pointing to `../../packages/ds/src/*`.
+**Rationale:** The preview app needs to understand DS internal aliases when typechecking transpiled source. This is a cross-workspace path resolution concern, not a design choice. The alternative (rewriting DS imports to relative paths) would break the DS package's own alias convention.
+
+## Decision #20 — 2026-02-27
+
+**Context:** Preview app navigation architecture — tabs vs sidebar + routes.
+**Decision:** Sidebar with route-per-page using Next.js App Router file-based routing.
+**Rationale:** Scales linearly as components are added (one file per page vs growing tab array). Supports deep-linking. Leverages App Router instead of fighting it. Each page is independently loadable.
+
+## Decision #19 — 2026-02-27
+
+**Context:** How the DS package exposes its API — barrel file vs deep imports.
+**Decision:** Deep subpath exports: `@aleph-front/ds/button`, not `@aleph-front/ds`. No barrel files.
+**Rationale:** Explicit, tree-shakeable, no barrel maintenance. Each export maps directly to a source file in `package.json` `"exports"`.
+
+## Decision #18 — 2026-02-27
+
+**Context:** Monorepo vs separate repos. Source exports vs compiled dist.
+**Decision:** pnpm monorepo with source-level exports (raw `.tsx` via `"exports"` in `package.json`). Consumers compile with their own bundler via `transpilePackages`.
+**Rationale:** One repo, one CI, workspace linking eliminates publish cycle friction. Source exports mean zero build step and instant feedback. All consumers are bundler-based (Next.js), so raw source works. A build step (tsup) can be added later if npm publishing requires it.
+**Alternatives considered:** Separate repos (justified only at dedicated-team scale), compiled dist with tsup (unnecessary overhead for workspace consumers).
+
 ## Decision #17 — 2026-02-27
 
 **Context:** Semantic token `--border` produces Tailwind class `border-border` (utility prefix + token name stutter).

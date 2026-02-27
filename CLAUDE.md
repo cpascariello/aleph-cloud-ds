@@ -161,38 +161,38 @@ Tokens-only design system for Aleph Cloud, with a Next.js preview app to visuali
 
 ### Tech Stack
 
+- **Monorepo:** pnpm workspaces (`packages/ds` + `apps/preview`)
 - **Framework:** Next.js 16 (App Router, static export)
 - **Language:** TypeScript 5.9 (strict)
 - **Styling:** Tailwind CSS 4 + CSS custom properties
-- **Database:** None
+- **Testing:** Vitest + Testing Library
 - **Deployment:** Static export (`out/` directory)
 
 ### Commands
 
 ```bash
-pnpm dev          # Dev server (Turbopack)
-pnpm build        # Production build (static export to out/)
-pnpm lint         # oxlint
-pnpm typecheck    # tsc --noEmit
-pnpm test         # vitest
-pnpm check        # lint + typecheck + test
+pnpm dev          # Dev server (Turbopack) — preview app
+pnpm build        # Static export — preview app
+pnpm test         # vitest — DS package
+pnpm lint         # oxlint — all workspaces
+pnpm typecheck    # tsc --noEmit — all workspaces
+pnpm check        # lint + typecheck + test — all workspaces
 ```
 
 ### Key Directories
 
 ```
-src/styles/           # Design tokens (tokens.css with OKLCH scales)
-src/components/       # Preview UI components
-src/components/button/  # Button component + tests
-src/components/ui/    # Shared primitives (Spinner)
-src/components/tabs/  # Tab content components
-src/lib/              # Utilities (cn.ts)
-src/app/              # Next.js pages and layout
-docs/plans/           # Design and implementation plans
+packages/ds/src/styles/       # Design tokens (tokens.css with OKLCH scales)
+packages/ds/src/components/   # DS components (button, input, textarea, form-field)
+packages/ds/src/lib/          # Utilities (cn.ts)
+apps/preview/src/app/         # Next.js pages and layout
+apps/preview/src/components/  # Preview-only UI (sidebar, theme-switcher)
+docs/plans/                   # Design and implementation plans
 ```
 
 ### Current Features
 
+- pnpm monorepo with source-level subpath exports (`@aleph-front/ds/*`)
 - Three-layer token system (OKLCH color scales 50–950, semantic tokens, Tailwind mapping)
 - OKLCH color scales for primary, accent, success, warning, error, neutral
 - Light/dark theme switching via `.theme-dark` class with `@custom-variant dark`
@@ -202,5 +202,5 @@ docs/plans/           # Design and implementation plans
 - Input component with 2 sizes, error/disabled states
 - Textarea component with rows default, vertical resize, error/disabled states
 - FormField wrapper with label, required asterisk, helper text, error message, auto-wired accessibility
-- Preview app with 6 tabs (Components, Colors, Typography, Spacing, Effects, Icons)
+- Preview app with sidebar navigation and route-per-page (10 pages)
 - Static export for deployment

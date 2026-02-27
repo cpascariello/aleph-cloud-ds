@@ -1,0 +1,43 @@
+{
+  "name": "@aleph-front/ds",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./button": "./src/components/button/button.tsx",
+    "./input": "./src/components/input/input.tsx",
+    "./textarea": "./src/components/textarea/textarea.tsx",
+    "./form-field": "./src/components/form-field/form-field.tsx",
+    "./ui/spinner": "./src/components/ui/spinner.tsx",
+    "./lib/cn": "./src/lib/cn.ts",
+    "./styles/tokens.css": "./src/styles/tokens.css"
+  },
+  "scripts": {
+    "lint": "oxlint --import-plugin src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "pnpm lint && pnpm typecheck && pnpm test"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.5.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "16.3.2",
+    "@types/jsdom": "28.0.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.1.4",
+    "jsdom": "28.1.0",
+    "oxlint": "1.50.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
+  }
+}

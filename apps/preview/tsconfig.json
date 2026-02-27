@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "incremental": true,
+    "plugins": [
+      { "name": "next" }
+    ],
+    "paths": {
+      "@preview/*": ["./src/*"],
+      "@ac/*": ["../../packages/ds/src/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "next-env.d.ts",
+    "next.config.ts",
+    "postcss.config.mjs",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
