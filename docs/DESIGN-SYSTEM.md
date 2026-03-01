@@ -734,7 +734,7 @@ import { Card } from "@aleph-front/ds/card";
 #### Variants
 
 ```tsx
-<Card variant="default">Bordered card</Card>  {/* bg-card, border-edge, rounded-2xl */}
+<Card variant="default">Bordered card</Card>  {/* bg-card, border-edge, rounded-xl */}
 <Card variant="ghost">No border</Card>        {/* transparent, no border */}
 ```
 
