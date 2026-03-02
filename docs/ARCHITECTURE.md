@@ -183,6 +183,19 @@ If either answer is "no," promote the token:
 
 **Example:** `--gradient-main` has a dark end (`#141421`) that matches the dark mode background. Promoted: `--gradient-main-base` and `--gradient-main-dark` in Layer 1, `--gradient-main` in Layer 2 swaps per theme.
 
+### Ecosystem Aliases for Color Tokens
+
+When a widely-used convention (shadcn, Bootstrap) uses a different name for a color the DS already provides, add a `var()` alias in Layer 1 rather than renaming. The canonical name stays authoritative; the alias prevents silent CSS failures in consumer projects.
+
+**Pattern:** `--color-<alias>-<stop>: var(--color-<canonical>-<stop>)` for each stop in the scale. Also alias gradients if one exists.
+
+**Current aliases:**
+| Alias | Canonical | Source convention |
+|-------|-----------|-------------------|
+| `destructive` | `error` | shadcn/Tailwind |
+
+**When NOT to alias:** Don't alias names that differ in meaning, only in vocabulary. `danger` (Bootstrap) and `destructive` (shadcn) both mean "error-colored" — alias is appropriate. But `info` and `primary` use different colors — that's not an alias, it's a new scale.
+
 ---
 
 ## Patterns

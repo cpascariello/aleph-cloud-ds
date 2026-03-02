@@ -67,6 +67,19 @@
   --color-error-900: oklch(0.30 0.095 12);
   --color-error-950: oklch(0.20 0.055 12);
 
+  /* Destructive (alias → error, for shadcn/Tailwind convention compatibility) */
+  --color-destructive-50: var(--color-error-50);
+  --color-destructive-100: var(--color-error-100);
+  --color-destructive-200: var(--color-error-200);
+  --color-destructive-300: var(--color-error-300);
+  --color-destructive-400: var(--color-error-400);
+  --color-destructive-500: var(--color-error-500);
+  --color-destructive-600: var(--color-error-600);
+  --color-destructive-700: var(--color-error-700);
+  --color-destructive-800: var(--color-error-800);
+  --color-destructive-900: var(--color-error-900);
+  --color-destructive-950: var(--color-error-950);
+
   /* Neutral (gray with slight purple tint, H: 265) */
   --color-neutral-50: oklch(0.98 0.003 265);
   --color-neutral-100: oklch(0.94 0.006 265);
@@ -93,6 +106,7 @@
   --gradient-warning: linear-gradient(90deg, #FFE814 0%, #FBAE18 100%);
   --gradient-error: linear-gradient(90deg, #FFAC89 0%, #DE3668 90.62%);
   --gradient-info: linear-gradient(90deg, #C8ADF0 22.66%, #5100CD 244.27%);
+  --gradient-destructive: var(--gradient-error);
 
   /* Shadows */
   --shadow-brand-sm: 0px 4px 4px oklch(0.372 0.254 285.48 / 0.15);

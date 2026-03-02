@@ -120,6 +120,7 @@ Full OKLCH 50–950 scales. Each scale has 11 stops, available as Tailwind class
 | `success` | 145 (green) | 500 = #36D846 | Success states |
 | `warning` | 75 (amber) | 500 = #FBAE18 | Warning states |
 | `error` | 12 (red) | 600 = #DE3668 | Error states |
+| `destructive` | (alias → `error`) | — | Convenience alias for shadcn/Tailwind convention |
 | `neutral` | 265 (purple-tinted gray) | — | Borders, backgrounds, text |
 | `base` | 280 (dark indigo) | — | Dark surface palette (tone-sur-tone with `#141421`) |
 
@@ -231,6 +232,7 @@ Available as CSS custom properties. Use via `style` attribute.
 | `success` | `var(--gradient-success)` | `#36D846` → `#63E570` | Success states |
 | `warning` | `var(--gradient-warning)` | `#FFE814` → `#FBAE18` | Warning states |
 | `error` | `var(--gradient-error)` | `#FFAC89` → `#DE3668` | Error states |
+| `destructive` | `var(--gradient-destructive)` | (alias → `error`) | Convenience alias |
 | `info` | `var(--gradient-info)` | `#C8ADF0` → `#5100CD` | Info states |
 
 ### Gradient Border Utilities

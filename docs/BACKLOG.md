@@ -15,12 +15,6 @@ Ideas and scope creep captured for later consideration.
 
 ## Open Items
 
-### 2026-03-02 — Align color token naming with Tailwind conventions
-
-**Source:** scheduler-dashboard — sparklines used `var(--color-destructive)` which doesn't exist in DS
-**Description:** DS uses `error`/`success`/`warning` naming while Tailwind convention uses `destructive`. Developers and AI models expect Tailwind-convention names and hit missing tokens. Consider adding semantic aliases (`destructive` → `error-*`) or providing typed token exports for compile-time validation.
-**Priority:** Medium
-
 ### 2026-03-01 — Theme persistence across page reloads
 
 **Source:** Identified during accessibility audit
@@ -104,5 +98,6 @@ Ideas and scope creep captured for later consideration.
 - [x] 2026-02-27 — Select dropdown animation classes are dead (removed, no phantom features)
 - [x] 2026-03-01 — Dashboard components: Badge, StatusDot, Card, Skeleton, Table, Tooltip
 - [x] 2026-03-01 — Accessibility audit & hardening (StatusDot a11y, FormField error injection, Table keyboard nav, motion-reduce support, responsive mobile layout)
+- [x] 2026-03-02 — Align color token naming with Tailwind conventions (`destructive` → `error` alias)
 
 </details>

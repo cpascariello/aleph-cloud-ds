@@ -18,6 +18,13 @@ Each entry includes:
 
 ---
 
+## Decision #44 — 2026-03-02
+
+**Context:** scheduler-dashboard used `var(--color-destructive)` for sparkline colors — a name from the shadcn/Tailwind convention. The DS uses `error` for the same color. The token resolved to nothing, causing invisible sparklines.
+**Decision:** Add `destructive` as a pure CSS alias for `error` at Layer 1 (`@theme`). Full scale (`--color-destructive-{50..950}`) and gradient (`--gradient-destructive`) point to their `error` counterparts via `var()`. DS components keep `error` in their prop APIs.
+**Rationale:** `error` and `destructive` describe different concepts (state vs intent) but use the same color. Renaming all components to `destructive` would make `<Badge variant="destructive">` and `<StatusDot status="destructive">` read wrong semantically. The alias lives at the color token layer where the naming mismatch actually caused the failure. Adding the alias is zero-cost (CSS `var()` references) and prevents silent failures in any consumer project that reaches for the shadcn convention.
+**Alternatives considered:** Renaming `error` → `destructive` everywhere (breaks semantics of non-action components), documenting without aliasing (doesn't prevent the failure), adding `danger` alias too (YAGNI — no real-world hit yet).
+
 ## Decision #43 — 2026-03-01
 
 **Context:** Shadow scale had inconsistent geometry — `brand-sm` used 4px blur while `brand` and `brand-lg` shared 24px blur with only opacity difference. Adding `shadow-brand-xs` for subtle form field shadows made the scale naming confusing (xs had bigger blur than sm).
