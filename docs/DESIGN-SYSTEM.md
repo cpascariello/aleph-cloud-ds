@@ -832,9 +832,15 @@ const columns: Column<Node>[] = [
 />
 ```
 
-**Visual style:** Alternating rows (`even:bg-muted/30`), hover highlight (`hover:bg-muted/50`), clickable rows with `cursor-pointer`. Header row `bg-muted/50 text-muted-foreground text-sm font-semibold uppercase tracking-wide`.
+**Active row:** Pass `activeKey` matching a `keyExtractor` value to highlight the selected row with a primary-tinted background and left inset border. Sets `aria-current="true"` for screen readers.
 
-**Keyboard accessibility:** Sortable headers are focusable (`tabIndex={0}`) and respond to Enter/Space. Clickable rows are focusable and respond to Enter. Headers include `aria-sort` (`ascending`/`descending`/`none`).
+```tsx
+<Table columns={columns} data={nodes} keyExtractor={(r) => r.id} activeKey={selectedId} />
+```
+
+**Visual style:** Alternating rows (`even:bg-muted/30`), hover highlight (`hover:bg-muted/50`), clickable rows with `cursor-pointer` and left inset border on hover. Header row `bg-muted/50 text-muted-foreground text-sm font-semibold uppercase tracking-wide`.
+
+**Keyboard accessibility:** Sortable headers are focusable (`tabIndex={0}`) and respond to Enter/Space. Clickable rows are focusable and respond to Enter. Headers include `aria-sort` (`ascending`/`descending`/`none`). Active row has `aria-current="true"`.
 
 **Empty state:** Pass `emptyState` (ReactNode) to render a centered message spanning all columns when `data` is empty.
 

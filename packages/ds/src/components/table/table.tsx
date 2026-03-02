@@ -19,6 +19,7 @@ type TableProps<T> = {
   data: T[];
   keyExtractor: (row: T) => string;
   onRowClick?: (row: T) => void;
+  activeKey?: string | undefined;
   emptyState?: ReactNode;
   className?: string;
 };
@@ -60,6 +61,7 @@ export function Table<T>({
   data,
   keyExtractor,
   onRowClick,
+  activeKey,
   emptyState,
   className,
 }: TableProps<T>) {
@@ -165,11 +167,17 @@ export function Table<T>({
               <tr
                 key={keyExtractor(row)}
                 className={cn(
-                  "border-b border-edge transition-colors",
-                  "even:bg-muted/30",
+                  "border-b border-edge transition-all",
+                  activeKey === keyExtractor(row)
+                    ? "bg-primary-600/10 shadow-[inset_3px_0_0_var(--color-primary-500)]"
+                    : "even:bg-muted/30",
                   "hover:bg-muted/50",
-                  onRowClick && "cursor-pointer",
+                  onRowClick &&
+                    "cursor-pointer hover:shadow-[inset_3px_0_0_var(--color-primary-500)]",
                 )}
+                aria-current={
+                  activeKey === keyExtractor(row) ? "true" : undefined
+                }
                 style={{ transitionDuration: "var(--duration-fast)" }}
                 tabIndex={onRowClick ? 0 : undefined}
                 onClick={onRowClick ? () => onRowClick(row) : undefined}
