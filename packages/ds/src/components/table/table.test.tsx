@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { Table } from "./table";
@@ -242,5 +242,42 @@ describe("Table", () => {
     );
     expect(screen.queryByText("No data")).toBeNull();
     expect(screen.getByText("Alpha")).toBeTruthy();
+  });
+
+  it("active row has aria-current", () => {
+    render(
+      <Table
+        columns={columns}
+        data={data}
+        keyExtractor={(r) => r.id}
+        activeKey="2"
+      />,
+    );
+    const rows = screen.getAllByRole("row");
+    expect(rows[2]?.getAttribute("aria-current")).toBe("true");
+  });
+
+  it("non-active rows lack aria-current", () => {
+    render(
+      <Table
+        columns={columns}
+        data={data}
+        keyExtractor={(r) => r.id}
+        activeKey="2"
+      />,
+    );
+    const rows = screen.getAllByRole("row");
+    expect(rows[1]?.hasAttribute("aria-current")).toBe(false);
+    expect(rows[3]?.hasAttribute("aria-current")).toBe(false);
+  });
+
+  it("no rows have aria-current when activeKey is undefined", () => {
+    render(
+      <Table columns={columns} data={data} keyExtractor={(r) => r.id} />,
+    );
+    const rows = screen.getAllByRole("row");
+    for (const row of rows) {
+      expect(row.hasAttribute("aria-current")).toBe(false);
+    }
   });
 });
