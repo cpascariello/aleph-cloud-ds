@@ -30,6 +30,8 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
+      - run: npm install -g npm@latest
+
       - run: pnpm install --frozen-lockfile
 
       - name: Build DS package
@@ -40,7 +42,5 @@ jobs:
         run: pnpm check:package
 
       - name: Publish to npm
-        run: pnpm --filter @aleph-front-bkp/ds publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: "true"
+        working-directory: packages/ds
+        run: npm publish --access public
