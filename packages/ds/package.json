@@ -1,6 +1,6 @@
 {
   "name": "@aleph-front-bkp/ds",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -96,7 +96,10 @@
       "./styles/tokens.css": "./src/styles/tokens.css"
     }
   },
-  "files": ["dist", "src/styles"],
+  "files": [
+    "dist",
+    "src/styles"
+  ],
   "scripts": {
     "build": "tsup",
     "check:package": "publint && pnpm pack --pack-destination /tmp && attw /tmp/aleph-front-bkp-ds-*.tgz --profile esm-only --exclude-entrypoints ./styles/tokens.css && rm -f /tmp/aleph-front-bkp-ds-*.tgz",
