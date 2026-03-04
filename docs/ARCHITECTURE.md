@@ -156,6 +156,8 @@ The DS package uses tsup to compile `.tsx` source into ESM JavaScript + `.d.ts` 
 
 **Package verification:** `publint` validates export map integrity, `@arethetypeswrong/cli` validates TypeScript declaration resolution. Both run in CI before publish.
 
+**Publishing:** OIDC trusted publishing (tokenless, GA since July 2025). The publish workflow upgrades npm to >= 11.5.1 (required for OIDC), then runs `npm publish` which automatically exchanges an OIDC token with npm's registry. No `NODE_AUTH_TOKEN` or stored secrets — `actions/setup-node` must NOT use `registry-url` (it auto-sets `NODE_AUTH_TOKEN` which blocks OIDC). See `docs/guides/npm-publish.md` for full setup and troubleshooting.
+
 **Key files:** `packages/ds/tsup.config.ts`, `.github/workflows/ci.yml`, `.github/workflows/publish.yml`
 
 ### Deep imports (no barrel files)

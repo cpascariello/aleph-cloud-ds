@@ -18,12 +18,20 @@ Each entry includes:
 
 ---
 
+## Decision #46 — 2026-03-04
+
+**Context:** OIDC trusted publishing failed repeatedly in the publish workflow. Multiple iterations to get it working.
+**Decision:** Do NOT use `registry-url` in `actions/setup-node`. Upgrade npm globally (`npm install -g npm@latest`) for OIDC support. Use `npm publish` directly (not `pnpm publish`). Trusted publisher config on npmjs.com must use the repository **name** only (not the full URL).
+**Rationale:** `actions/setup-node` with `registry-url` auto-sets `NODE_AUTH_TOKEN` to `GITHUB_TOKEN` for all subsequent steps — this silently blocks OIDC, which only activates when no auth token is present. npm >= 11.5.1 is required for OIDC but Node 22 ships with npm 10.x. The `npm publish` command handles the OIDC token exchange natively. The npmjs.com trusted publisher form expects just the repo name in the "Repository" field — entering a full URL causes the OIDC token exchange to fail with "package not found".
+
+---
+
 ## Decision #45 — 2026-03-04
 
 **Context:** Setting up npm publishing for `@aleph-front-bkp/ds`. Needed to choose versioning trigger, build tool, export strategy, and authentication method.
 **Decision:** Tag-triggered GitHub Actions publish (`v*` tags) with OIDC trusted publishing (no stored npm tokens). tsup builds ESM + DTS. Hybrid `publishConfig.exports` keeps raw `.tsx` for local dev while shipping compiled output to npm. Two workflows: `ci.yml` (PR validation) and `publish.yml` (tag-triggered publish).
-**Rationale:** Tag trigger is simpler than Changesets for a small team — direct control without automation overhead. OIDC is the only forward-looking auth path (npm revoked classic tokens Dec 2025). tsup over tsdown for maturity. Hybrid exports preserve the zero-build DX that makes monorepo dev fast.
-**Alternatives considered:** Changesets (automation overhead not justified yet — can migrate later), manual workflow_dispatch (too easy to forget), shipping raw `.tsx` to npm (requires consumers to have TypeScript + compatible bundler, non-standard).
+**Rationale:** Tag trigger is simpler than Changesets for a small team — direct control without automation overhead. OIDC is the only forward-looking auth path (npm deprecated classic tokens Dec 2025). tsup over tsdown for maturity. Hybrid exports preserve the zero-build DX that makes monorepo dev fast.
+**Alternatives considered:** Changesets (automation overhead not justified yet — can migrate later), manual workflow_dispatch (too easy to forget), shipping raw `.tsx` to npm (requires consumers to have TypeScript + compatible bundler, non-standard), `NODE_AUTH_TOKEN` with granular access tokens (works but npm deprecated classic tokens and granular tokens have 90-day max expiry — OIDC is the intended path forward).
 
 ---
 

@@ -179,6 +179,12 @@ pnpm typecheck    # tsc --noEmit — all workspaces
 pnpm check        # lint + typecheck + test — all workspaces
 pnpm --filter @aleph-front-bkp/ds build          # tsup build — DS package only
 pnpm --filter @aleph-front-bkp/ds check:package  # publint + attw verification
+
+# Release (see docs/guides/npm-publish.md for full guide)
+cd packages/ds && npm version patch  # bump version
+git add package.json && git commit -m "release: vX.Y.Z"
+git tag vX.Y.Z
+git push origin main && git push origin vX.Y.Z  # triggers publish workflow
 ```
 
 ### Key Directories
@@ -219,5 +225,5 @@ docs/plans/                   # Design and implementation plans
 - Static export for deployment
 - tsup build pipeline with hybrid publishConfig exports (raw .tsx locally, compiled dist/ on npm)
 - GitHub Actions CI (lint, typecheck, test, build, package verify on PRs)
-- GitHub Actions publish (OIDC trusted publishing on v* tag push, provenance attestation)
+- GitHub Actions publish (tokenless OIDC trusted publishing on v* tag push, npm >= 11.5.1, provenance attestation)
 - publint + @arethetypeswrong/cli package verification
