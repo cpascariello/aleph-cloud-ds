@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@aleph-front/ds/card";
+import { Card } from "@aleph-front-bkp/ds/card";
 import { PageHeader } from "@preview/components/page-header";
 import { DemoSection } from "@preview/components/demo-section";
 

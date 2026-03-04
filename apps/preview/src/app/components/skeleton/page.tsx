@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "@aleph-front/ds/ui/skeleton";
+import { Skeleton } from "@aleph-front-bkp/ds/ui/skeleton";
 import { PageHeader } from "@preview/components/page-header";
 import { DemoSection } from "@preview/components/demo-section";
 

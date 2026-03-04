@@ -177,6 +177,8 @@ pnpm test         # vitest — DS package
 pnpm lint         # oxlint — all workspaces
 pnpm typecheck    # tsc --noEmit — all workspaces
 pnpm check        # lint + typecheck + test — all workspaces
+pnpm --filter @aleph-front-bkp/ds build          # tsup build — DS package only
+pnpm --filter @aleph-front-bkp/ds check:package  # publint + attw verification
 ```
 
 ### Key Directories
@@ -192,7 +194,7 @@ docs/plans/                   # Design and implementation plans
 
 ### Current Features
 
-- pnpm monorepo with source-level subpath exports (`@aleph-front/ds/*`)
+- pnpm monorepo with source-level subpath exports (`@aleph-front-bkp/ds/*`)
 - Three-layer token system (OKLCH color scales 50–950, semantic tokens incl. `--surface` for elevated backgrounds, Tailwind mapping)
 - OKLCH color scales for primary, accent, success, warning, error, neutral
 - Light/dark theme switching via `.theme-dark` class with `@custom-variant dark`
@@ -215,3 +217,7 @@ docs/plans/                   # Design and implementation plans
 - All animated components respect prefers-reduced-motion via motion-reduce: variants
 - Preview app with responsive sidebar navigation (desktop fixed + mobile drawer) and route-per-page (20 pages)
 - Static export for deployment
+- tsup build pipeline with hybrid publishConfig exports (raw .tsx locally, compiled dist/ on npm)
+- GitHub Actions CI (lint, typecheck, test, build, package verify on PRs)
+- GitHub Actions publish (OIDC trusted publishing on v* tag push, provenance attestation)
+- publint + @arethetypeswrong/cli package verification

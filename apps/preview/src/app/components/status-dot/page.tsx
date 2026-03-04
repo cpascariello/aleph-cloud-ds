@@ -1,6 +1,6 @@
 "use client";
 
-import { StatusDot } from "@aleph-front/ds/status-dot";
+import { StatusDot } from "@aleph-front-bkp/ds/status-dot";
 import { PageHeader } from "@preview/components/page-header";
 import { DemoSection } from "@preview/components/demo-section";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@aleph-front/preview",
+  "name": "@aleph-front-bkp/preview",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "check": "pnpm lint && pnpm typecheck"
   },
   "dependencies": {
-    "@aleph-front/ds": "workspace:*",
+    "@aleph-front-bkp/ds": "workspace:*",
     "next": "16.1.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"

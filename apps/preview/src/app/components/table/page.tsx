@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@aleph-front/ds/badge";
-import { StatusDot } from "@aleph-front/ds/status-dot";
-import { Table, type Column } from "@aleph-front/ds/table";
+import { Badge } from "@aleph-front-bkp/ds/badge";
+import { StatusDot } from "@aleph-front-bkp/ds/status-dot";
+import { Table, type Column } from "@aleph-front-bkp/ds/table";
 import { PageHeader } from "@preview/components/page-header";
 import { DemoSection } from "@preview/components/demo-section";
 

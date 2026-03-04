@@ -2,6 +2,7 @@ node_modules/
 .next/
 out/
 *.tsbuildinfo
+dist/
 .env
 .env.local
 .template-version

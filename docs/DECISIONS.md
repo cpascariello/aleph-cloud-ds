@@ -18,6 +18,15 @@ Each entry includes:
 
 ---
 
+## Decision #45 — 2026-03-04
+
+**Context:** Setting up npm publishing for `@aleph-front-bkp/ds`. Needed to choose versioning trigger, build tool, export strategy, and authentication method.
+**Decision:** Tag-triggered GitHub Actions publish (`v*` tags) with OIDC trusted publishing (no stored npm tokens). tsup builds ESM + DTS. Hybrid `publishConfig.exports` keeps raw `.tsx` for local dev while shipping compiled output to npm. Two workflows: `ci.yml` (PR validation) and `publish.yml` (tag-triggered publish).
+**Rationale:** Tag trigger is simpler than Changesets for a small team — direct control without automation overhead. OIDC is the only forward-looking auth path (npm revoked classic tokens Dec 2025). tsup over tsdown for maturity. Hybrid exports preserve the zero-build DX that makes monorepo dev fast.
+**Alternatives considered:** Changesets (automation overhead not justified yet — can migrate later), manual workflow_dispatch (too easy to forget), shipping raw `.tsx` to npm (requires consumers to have TypeScript + compatible bundler, non-standard).
+
+---
+
 ## Decision #44 — 2026-03-02
 
 **Context:** scheduler-dashboard used `var(--color-destructive)` for sparkline colors — a name from the shadcn/Tailwind convention. The DS uses `error` for the same color. The token resolved to nothing, causing invisible sparklines.
@@ -176,7 +185,7 @@ Each entry includes:
 ## Decision #19 — 2026-02-27
 
 **Context:** How the DS package exposes its API — barrel file vs deep imports.
-**Decision:** Deep subpath exports: `@aleph-front/ds/button`, not `@aleph-front/ds`. No barrel files.
+**Decision:** Deep subpath exports: `@aleph-front-bkp/ds/button`, not `@aleph-front-bkp/ds`. No barrel files.
 **Rationale:** Explicit, tree-shakeable, no barrel maintenance. Each export maps directly to a source file in `package.json` `"exports"`.
 
 ## Decision #18 — 2026-02-27

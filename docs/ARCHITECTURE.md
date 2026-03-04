@@ -25,8 +25,13 @@ aleph-cloud-ds/
 ├── tsconfig.base.json            # Shared TS compiler options
 ├── package.json                  # Root scripts (delegates to workspaces)
 │
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                # PR validation (lint, typecheck, test, build, verify)
+│       └── publish.yml           # npm publish on v* tag (OIDC trusted publishing)
+│
 ├── packages/
-│   └── ds/                       # @aleph-front/ds
+│   └── ds/                       # @aleph-front-bkp/ds
 │       ├── src/
 │       │   ├── components/
 │       │   │   ├── badge/
@@ -76,12 +81,14 @@ aleph-cloud-ds/
 │       │   │   └── tokens.css
 │       │   └── lib/
 │       │       └── cn.ts
-│       ├── package.json          # Subpath exports, peer deps
+│       ├── package.json          # Subpath exports, peer deps, publishConfig
 │       ├── tsconfig.json
+│       ├── tsup.config.ts        # Build config (entry points, externals, DTS)
+│       ├── CHANGELOG.md
 │       └── vitest.config.ts
 │
 ├── apps/
-│   └── preview/                  # @aleph-front/preview
+│   └── preview/                  # @aleph-front-bkp/preview
 │       ├── src/
 │       │   ├── app/
 │       │   │   ├── layout.tsx    # Shell: header + sidebar + content
@@ -123,7 +130,9 @@ aleph-cloud-ds/
     ├── ARCHITECTURE.md
     ├── DECISIONS.md
     ├── BACKLOG.md
-    └── plans/
+    ├── plans/
+    └── guides/
+        └── npm-publish.md        # Publishing guide & template notes
 ```
 
 ---
@@ -132,16 +141,26 @@ aleph-cloud-ds/
 
 | Workspace | Package name | Purpose |
 |-----------|-------------|---------|
-| `packages/ds` | `@aleph-front/ds` | Publishable design system (tokens, components, utilities) |
-| `apps/preview` | `@aleph-front/preview` | Next.js preview app for visual documentation |
+| `packages/ds` | `@aleph-front-bkp/ds` | Publishable design system (tokens, components, utilities) |
+| `apps/preview` | `@aleph-front-bkp/preview` | Next.js preview app for visual documentation |
 
-### Source exports (no build step)
+### Source exports (local dev)
 
-The DS package exports raw `.tsx` source files via `"exports"` in `package.json`. Consumers compile it themselves via their bundler. This eliminates a build step entirely. Consumer apps must add `transpilePackages: ["@aleph-front/ds"]` to their Next.js config.
+The DS package exports raw `.tsx` source files via `"exports"` in `package.json` for local monorepo dev. Consumer apps compile it themselves via their bundler (add `transpilePackages: ["@aleph-front-bkp/ds"]` to Next.js config). For npm consumers, `publishConfig.exports` overrides these paths with compiled `dist/` output — see "Build & Publish" below.
+
+### Build & Publish
+
+The DS package uses tsup to compile `.tsx` source into ESM JavaScript + `.d.ts` type declarations for npm publishing. The `publishConfig.exports` field in `package.json` swaps raw source paths for compiled `dist/` paths at publish time — local monorepo dev still uses raw `.tsx` imports with zero build latency.
+
+**Build command:** `pnpm --filter @aleph-front-bkp/ds build` (runs tsup)
+
+**Package verification:** `publint` validates export map integrity, `@arethetypeswrong/cli` validates TypeScript declaration resolution. Both run in CI before publish.
+
+**Key files:** `packages/ds/tsup.config.ts`, `.github/workflows/ci.yml`, `.github/workflows/publish.yml`
 
 ### Deep imports (no barrel files)
 
-Components are imported individually: `@aleph-front/ds/button`, not `@aleph-front/ds`. This is explicit, tree-shakeable, and requires no barrel file maintenance.
+Components are imported individually: `@aleph-front-bkp/ds/button`, not `@aleph-front-bkp/ds`. This is explicit, tree-shakeable, and requires no barrel file maintenance.
 
 ---
 
@@ -511,20 +530,21 @@ Design system components are visual by nature — most of their code maps props 
 3. Colocate tests as `<name>.test.tsx` — test behavior and accessibility only (see Testing Philosophy above)
 4. Export from the component file directly — no barrel `index.ts` files
 5. Add subpath export to `packages/ds/package.json`: `"./<name>": "./src/components/<name>/<name>.tsx"`
+6. Add entry point to `packages/ds/tsup.config.ts` and matching `publishConfig.exports` entry in `package.json`
 
 **Preview:**
-6. Create a preview page at `apps/preview/src/app/components/<name>/page.tsx`
-7. Add sidebar entry in `apps/preview/src/components/sidebar.tsx` (use a `group` entry for related components like Forms)
-8. Run `pnpm dev` and verify the preview page renders correctly — ask the user to check before proceeding
+7. Create a preview page at `apps/preview/src/app/components/<name>/page.tsx`
+8. Add sidebar entry in `apps/preview/src/components/sidebar.tsx` (use a `group` entry for related components like Forms)
+9. Run `pnpm dev` and verify the preview page renders correctly — ask the user to check before proceeding
 
 **Verify:**
-9. Run `pnpm check` (lint + typecheck + test) — all must pass
+10. Run `pnpm check` (lint + typecheck + test) — all must pass
 
 **Document (all required — do not skip any):**
-10. `docs/DESIGN-SYSTEM.md` § Components — usage examples, props, variants
-11. `docs/ARCHITECTURE.md` — add new patterns if this component introduced one (see Patterns section)
-12. `docs/DECISIONS.md` — log design decisions (why this API shape, why these variants, alternatives rejected)
-13. `docs/BACKLOG.md` — move completed items to archive, add deferred ideas
-14. `CLAUDE.md` Current Features list — add component with brief description, update preview page count
+11. `docs/DESIGN-SYSTEM.md` § Components — usage examples, props, variants
+12. `docs/ARCHITECTURE.md` — add new patterns if this component introduced one (see Patterns section)
+13. `docs/DECISIONS.md` — log design decisions (why this API shape, why these variants, alternatives rejected)
+14. `docs/BACKLOG.md` — move completed items to archive, add deferred ideas
+15. `CLAUDE.md` Current Features list — add component with brief description, update preview page count
 
 **This recipe is the single source of truth.** External projects that add DS components should reference it, not maintain their own copy.

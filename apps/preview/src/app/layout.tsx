@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Aleph Cloud Design System",
-  description: "Token preview for @aleph-front/ds",
+  description: "Token preview for @aleph-front-bkp/ds",
 };
 
 export default function RootLayout({

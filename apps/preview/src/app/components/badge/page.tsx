@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@aleph-front/ds/badge";
+import { Badge } from "@aleph-front-bkp/ds/badge";
 import { PageHeader } from "@preview/components/page-header";
 import { DemoSection } from "@preview/components/demo-section";
 

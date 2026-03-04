@@ -1,8 +1,13 @@
 {
-  "name": "@aleph-front/ds",
+  "name": "@aleph-front-bkp/ds",
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpascariello/aleph-cloud-ds.git",
+    "directory": "packages/ds"
+  },
   "exports": {
     "./button": "./src/components/button/button.tsx",
     "./checkbox": "./src/components/checkbox/checkbox.tsx",
@@ -22,7 +27,79 @@
     "./lib/cn": "./src/lib/cn.ts",
     "./styles/tokens.css": "./src/styles/tokens.css"
   },
+  "publishConfig": {
+    "exports": {
+      "./button": {
+        "types": "./dist/components/button/button.d.ts",
+        "import": "./dist/components/button/button.js"
+      },
+      "./checkbox": {
+        "types": "./dist/components/checkbox/checkbox.d.ts",
+        "import": "./dist/components/checkbox/checkbox.js"
+      },
+      "./input": {
+        "types": "./dist/components/input/input.d.ts",
+        "import": "./dist/components/input/input.js"
+      },
+      "./textarea": {
+        "types": "./dist/components/textarea/textarea.d.ts",
+        "import": "./dist/components/textarea/textarea.js"
+      },
+      "./select": {
+        "types": "./dist/components/select/select.d.ts",
+        "import": "./dist/components/select/select.js"
+      },
+      "./switch": {
+        "types": "./dist/components/switch/switch.d.ts",
+        "import": "./dist/components/switch/switch.js"
+      },
+      "./form-field": {
+        "types": "./dist/components/form-field/form-field.d.ts",
+        "import": "./dist/components/form-field/form-field.js"
+      },
+      "./badge": {
+        "types": "./dist/components/badge/badge.d.ts",
+        "import": "./dist/components/badge/badge.js"
+      },
+      "./card": {
+        "types": "./dist/components/card/card.d.ts",
+        "import": "./dist/components/card/card.js"
+      },
+      "./status-dot": {
+        "types": "./dist/components/status-dot/status-dot.d.ts",
+        "import": "./dist/components/status-dot/status-dot.js"
+      },
+      "./table": {
+        "types": "./dist/components/table/table.d.ts",
+        "import": "./dist/components/table/table.js"
+      },
+      "./tooltip": {
+        "types": "./dist/components/tooltip/tooltip.d.ts",
+        "import": "./dist/components/tooltip/tooltip.js"
+      },
+      "./radio-group": {
+        "types": "./dist/components/radio-group/radio-group.d.ts",
+        "import": "./dist/components/radio-group/radio-group.js"
+      },
+      "./ui/skeleton": {
+        "types": "./dist/components/ui/skeleton.d.ts",
+        "import": "./dist/components/ui/skeleton.js"
+      },
+      "./ui/spinner": {
+        "types": "./dist/components/ui/spinner.d.ts",
+        "import": "./dist/components/ui/spinner.js"
+      },
+      "./lib/cn": {
+        "types": "./dist/lib/cn.d.ts",
+        "import": "./dist/lib/cn.js"
+      },
+      "./styles/tokens.css": "./src/styles/tokens.css"
+    }
+  },
+  "files": ["dist", "src/styles"],
   "scripts": {
+    "build": "tsup",
+    "check:package": "publint && pnpm pack --pack-destination /tmp && attw /tmp/aleph-front-bkp-ds-*.tgz --profile esm-only --exclude-entrypoints ./styles/tokens.css && rm -f /tmp/aleph-front-bkp-ds-*.tgz",
     "lint": "oxlint --import-plugin src/",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -39,6 +116,7 @@
     "tailwind-merge": "3.5.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.2",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
@@ -48,8 +126,10 @@
     "@vitejs/plugin-react": "5.1.4",
     "jsdom": "28.1.0",
     "oxlint": "1.50.0",
+    "publint": "0.3.18",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "tsup": "8.5.1",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   }

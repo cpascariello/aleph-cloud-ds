@@ -1,6 +1,6 @@
 # Aleph Cloud Design System
 
-Tokens-first design system for [Aleph Cloud](https://aleph.im), built with Tailwind CSS 4, OKLCH color scales, and CSS custom properties. Ships as a component library (`@aleph-front/ds`) with a Next.js preview app for visual reference.
+Tokens-first design system for [Aleph Cloud](https://aleph.im), built with Tailwind CSS 4, OKLCH color scales, and CSS custom properties. Ships as a component library (`@aleph-front-bkp/ds`) with a Next.js preview app for visual reference.
 
 **Status:** Pre-release (`0.0.0`). Not yet published to npm.
 
@@ -31,8 +31,8 @@ pnpm check        # lint + typecheck + test
 ## Project Structure
 
 ```
-packages/ds/          # @aleph-front/ds — tokens + components
-apps/preview/         # @aleph-front/preview — Next.js preview app
+packages/ds/          # @aleph-front-bkp/ds — tokens + components
+apps/preview/         # @aleph-front-bkp/preview — Next.js preview app
 docs/                 # Architecture, decisions, design system docs
 ```
 
@@ -41,10 +41,10 @@ docs/                 # Architecture, decisions, design system docs
 The design system uses source-level subpath exports:
 
 ```tsx
-import { Button } from "@aleph-front/ds/button";
-import { Spinner } from "@aleph-front/ds/ui/spinner";
-import { cn } from "@aleph-front/ds/lib/cn";
-import "@aleph-front/ds/styles/tokens.css";
+import { Button } from "@aleph-front-bkp/ds/button";
+import { Spinner } from "@aleph-front-bkp/ds/ui/spinner";
+import { cn } from "@aleph-front-bkp/ds/lib/cn";
+import "@aleph-front-bkp/ds/styles/tokens.css";
 ```
 
 Within each workspace, internal imports use the `@ac/*` alias which resolves to `./src/*`.
@@ -65,18 +65,18 @@ pnpm link --global
 From your other project, link it:
 
 ```bash
-pnpm link --global @aleph-front/ds
+pnpm link --global @aleph-front-bkp/ds
 ```
 
 ### 2. Configure your bundler
 
-Since `@aleph-front/ds` ships source files, your bundler needs to transpile it.
+Since `@aleph-front-bkp/ds` ships source files, your bundler needs to transpile it.
 
 **Next.js** — add to `next.config.ts`:
 
 ```ts
 const nextConfig = {
-  transpilePackages: ["@aleph-front/ds"],
+  transpilePackages: ["@aleph-front-bkp/ds"],
 };
 ```
 
@@ -84,7 +84,7 @@ const nextConfig = {
 
 ```ts
 export default defineConfig({
-  ssr: { noExternal: ["@aleph-front/ds"] },
+  ssr: { noExternal: ["@aleph-front-bkp/ds"] },
 });
 ```
 
@@ -93,13 +93,13 @@ export default defineConfig({
 Import the design tokens in your app's global CSS or layout:
 
 ```css
-@import "@aleph-front/ds/styles/tokens.css";
+@import "@aleph-front-bkp/ds/styles/tokens.css";
 ```
 
 Or in a layout file:
 
 ```tsx
-import "@aleph-front/ds/styles/tokens.css";
+import "@aleph-front-bkp/ds/styles/tokens.css";
 ```
 
 ### 4. Tailwind CSS
@@ -108,7 +108,7 @@ If your project uses Tailwind, add the DS source to your content paths so Tailwi
 
 ```css
 @import "tailwindcss";
-@source "../../node_modules/@aleph-front/ds/src/**/*.tsx";
+@source "../../node_modules/@aleph-front-bkp/ds/src/**/*.tsx";
 ```
 
 ## Documentation

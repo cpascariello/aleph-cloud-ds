@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@aleph-front/ds/button";
+import { Button } from "@aleph-front-bkp/ds/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@aleph-front/ds/tooltip";
+} from "@aleph-front-bkp/ds/tooltip";
 import { PageHeader } from "@preview/components/page-header";
 import { DemoSection } from "@preview/components/demo-section";
 

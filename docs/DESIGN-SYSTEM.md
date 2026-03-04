@@ -68,25 +68,25 @@ Tests never assert CSS class names — those are implementation details that bre
 Install the DS package in your app:
 
 ```bash
-pnpm add @aleph-front/ds
+pnpm add @aleph-front-bkp/ds
 ```
 
 Import tokens in your CSS and components via subpath exports:
 
 ```css
 @import "tailwindcss";
-@import "@aleph-front/ds/styles/tokens.css";
+@import "@aleph-front-bkp/ds/styles/tokens.css";
 
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 ```
 
 ```tsx
-import { Button } from "@aleph-front/ds/button";
-import { Input } from "@aleph-front/ds/input";
-import { cn } from "@aleph-front/ds/lib/cn";
+import { Button } from "@aleph-front-bkp/ds/button";
+import { Input } from "@aleph-front-bkp/ds/input";
+import { cn } from "@aleph-front-bkp/ds/lib/cn";
 ```
 
-Consumer apps need `transpilePackages: ["@aleph-front/ds"]` in their Next.js config (DS exports raw `.tsx` source).
+Consumer apps need `transpilePackages: ["@aleph-front-bkp/ds"]` in their Next.js config (DS exports raw `.tsx` source).
 
 ## Themes
 
@@ -461,7 +461,7 @@ Size tokens for consistent icon sizing. No icon library included yet.
 CVA-based button with 6 variants, 4 sizes, icon slots, loading/disabled states, and `asChild` polymorphism.
 
 ```tsx
-import { Button } from "@aleph-front/ds/button";
+import { Button } from "@aleph-front-bkp/ds/button";
 ```
 
 **Visual style:** Pill shape (`rounded-full`), 3px border, `font-heading` at weight 700.
@@ -519,7 +519,7 @@ Renders button styles on a child element instead of `<button>`:
 #### Custom Composition with buttonVariants
 
 ```tsx
-import { buttonVariants } from "@aleph-front/ds/button";
+import { buttonVariants } from "@aleph-front-bkp/ds/button";
 
 <a href="/docs" className={buttonVariants({ variant: "outline", size: "sm" })}>
   Documentation
@@ -531,7 +531,7 @@ import { buttonVariants } from "@aleph-front/ds/button";
 Styled text input with CVA sizing and error state.
 
 ```tsx
-import { Input } from "@aleph-front/ds/input";
+import { Input } from "@aleph-front-bkp/ds/input";
 
 <Input size="md" placeholder="Enter text" />
 <Input size="sm" placeholder="Small" />
@@ -552,7 +552,7 @@ import { Input } from "@aleph-front/ds/input";
 Multi-line text input. Same API as Input, `rounded-2xl`, `shadow-brand`, vertical resize. Dark mode uses `bg-base-800`.
 
 ```tsx
-import { Textarea } from "@aleph-front/ds/textarea";
+import { Textarea } from "@aleph-front-bkp/ds/textarea";
 
 <Textarea placeholder="Enter message" />
 <Textarea size="sm" rows={6} />
@@ -566,8 +566,8 @@ import { Textarea } from "@aleph-front/ds/textarea";
 Layout wrapper that wires label, helper text, and error message to a child input with proper accessibility attributes.
 
 ```tsx
-import { FormField } from "@aleph-front/ds/form-field";
-import { Input } from "@aleph-front/ds/input";
+import { FormField } from "@aleph-front-bkp/ds/form-field";
+import { Input } from "@aleph-front-bkp/ds/input";
 
 <FormField label="Email" required helperText="We'll never share it">
   <Input type="email" placeholder="you@example.com" />
@@ -587,7 +587,7 @@ import { Input } from "@aleph-front/ds/input";
 Toggle control for boolean values. Wraps Radix UI Checkbox with CVA styling.
 
 ```tsx
-import { Checkbox } from "@aleph-front/ds/checkbox";
+import { Checkbox } from "@aleph-front-bkp/ds/checkbox";
 
 <Checkbox />
 <Checkbox defaultChecked />
@@ -614,7 +614,7 @@ import { Checkbox } from "@aleph-front/ds/checkbox";
 Mutually exclusive option set. Wraps Radix UI RadioGroup with CVA styling.
 
 ```tsx
-import { RadioGroup, RadioGroupItem } from "@aleph-front/ds/radio-group";
+import { RadioGroup, RadioGroupItem } from "@aleph-front-bkp/ds/radio-group";
 
 <RadioGroup defaultValue="a" onValueChange={setValue}>
   <RadioGroupItem value="a" />
@@ -643,7 +643,7 @@ import { RadioGroup, RadioGroupItem } from "@aleph-front/ds/radio-group";
 Toggle control for on/off states. Wraps Radix UI Switch with CVA styling and animated thumb.
 
 ```tsx
-import { Switch } from "@aleph-front/ds/switch";
+import { Switch } from "@aleph-front-bkp/ds/switch";
 
 <Switch />
 <Switch defaultChecked />
@@ -667,7 +667,7 @@ import { Switch } from "@aleph-front/ds/switch";
 Dropdown selector. Wraps Radix UI Select with flat `options` prop API.
 
 ```tsx
-import { Select } from "@aleph-front/ds/select";
+import { Select } from "@aleph-front-bkp/ds/select";
 
 <Select
   placeholder="Choose..."
@@ -701,7 +701,7 @@ import { Select } from "@aleph-front/ds/select";
 Semantic label for status, counts, and categories. Subtle rounded corners (`rounded`, 4px) with color variants.
 
 ```tsx
-import { Badge } from "@aleph-front/ds/badge";
+import { Badge } from "@aleph-front-bkp/ds/badge";
 ```
 
 #### Variants
@@ -724,7 +724,7 @@ import { Badge } from "@aleph-front/ds/badge";
 #### Custom Composition with badgeVariants
 
 ```tsx
-import { badgeVariants } from "@aleph-front/ds/badge";
+import { badgeVariants } from "@aleph-front-bkp/ds/badge";
 
 <span className={badgeVariants({ variant: "success", size: "sm" })}>Active</span>
 ```
@@ -734,7 +734,7 @@ import { badgeVariants } from "@aleph-front/ds/badge";
 Content container with semantic background and border. Used for stat cards, panels, and layout grouping.
 
 ```tsx
-import { Card } from "@aleph-front/ds/card";
+import { Card } from "@aleph-front-bkp/ds/card";
 ```
 
 #### Variants
@@ -768,7 +768,7 @@ Renders an `<h3>` heading with `font-heading` and `mb-4` spacing.
 Small colored circle indicating health status. Used inline with text labels in tables and lists. Accessible by default — includes `role="status"` and auto-derived `aria-label` from the status prop.
 
 ```tsx
-import { StatusDot } from "@aleph-front/ds/status-dot";
+import { StatusDot } from "@aleph-front-bkp/ds/status-dot";
 ```
 
 #### Statuses
@@ -799,7 +799,7 @@ import { StatusDot } from "@aleph-front/ds/status-dot";
 Generic typed table with sortable columns, alternating rows, hover highlight, row click, keyboard accessibility, and empty state.
 
 ```tsx
-import { Table, type Column } from "@aleph-front/ds/table";
+import { Table, type Column } from "@aleph-front-bkp/ds/table";
 ```
 
 #### Column Definition
@@ -851,7 +851,7 @@ Radix UI tooltip wrapper with DS styling. Composable API with four exports.
 ```tsx
 import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
-} from "@aleph-front/ds/tooltip";
+} from "@aleph-front-bkp/ds/tooltip";
 ```
 
 #### Usage
@@ -885,7 +885,7 @@ Wrap your app (or a subtree) with `TooltipProvider`, then compose tooltips:
 Animated loading placeholder. No width/height props — sizing is controlled by the consumer via `className`.
 
 ```tsx
-import { Skeleton } from "@aleph-front/ds/ui/skeleton";
+import { Skeleton } from "@aleph-front-bkp/ds/ui/skeleton";
 
 <Skeleton className="h-4 w-32" />           {/* Text line */}
 <Skeleton className="h-10 w-full" />         {/* Input field */}
@@ -899,7 +899,7 @@ Uses `animate-pulse bg-muted rounded-md`. Hidden from accessibility tree via `ar
 Animated loading indicator. Used internally by Button but available standalone.
 
 ```tsx
-import { Spinner } from "@aleph-front/ds/ui/spinner";
+import { Spinner } from "@aleph-front-bkp/ds/ui/spinner";
 
 <Spinner className="size-5 text-primary-600" />
 ```

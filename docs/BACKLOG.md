@@ -69,11 +69,11 @@ Ideas and scope creep captured for later consideration.
 **Description:** Add hover/focus animations to button icons (e.g., arrow slide on hover, plus rotate on focus).
 **Priority:** Low
 
-### 2026-02-26 — Package publishing
+### 2026-03-04 — Changesets migration
 
-**Source:** Design doc
-**Description:** Publish `@aleph-front/ds` to npm. Monorepo structure is in place — needs tsup build step for compiled dist.
-**Priority:** Medium
+**Source:** Identified during npm publish pipeline design
+**Description:** Migrate from manual version bumps + git tags to @changesets/cli for automated version management and changelog generation. Would add a "Version Packages" PR bot.
+**Priority:** Low (current tag-based workflow is sufficient for small team)
 
 ### 2026-03-01 — FX grain backgrounds (card-noise + variants)
 
@@ -99,5 +99,6 @@ Ideas and scope creep captured for later consideration.
 - [x] 2026-03-01 — Dashboard components: Badge, StatusDot, Card, Skeleton, Table, Tooltip
 - [x] 2026-03-01 — Accessibility audit & hardening (StatusDot a11y, FormField error injection, Table keyboard nav, motion-reduce support, responsive mobile layout)
 - [x] 2026-03-02 — Align color token naming with Tailwind conventions (`destructive` → `error` alias)
+- [x] 2026-03-04 — Package publishing (tsup build, GitHub Actions CI/publish, OIDC trusted publishing)
 
 </details>

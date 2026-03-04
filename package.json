@@ -4,9 +4,9 @@
   "type": "module",
   "packageManager": "pnpm@10.29.2",
   "scripts": {
-    "dev": "pnpm --filter @aleph-front/preview dev",
-    "build": "pnpm --filter @aleph-front/preview build",
-    "test": "pnpm --filter @aleph-front/ds test",
+    "dev": "pnpm --filter @aleph-front-bkp/preview dev",
+    "build": "pnpm --filter @aleph-front-bkp/preview build",
+    "test": "pnpm --filter @aleph-front-bkp/ds test",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
     "check": "pnpm -r check"

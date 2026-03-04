@@ -1,4 +1,4 @@
-import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
 import { Select as SelectPrimitive } from "radix-ui";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@ac/lib/cn";
@@ -33,10 +33,22 @@ type SelectOption = {
   disabled?: boolean;
 };
 
-type SelectProps = Omit<
-  ComponentPropsWithoutRef<typeof SelectPrimitive.Root>,
-  "children"
-> &
+type SelectRootProps = {
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?(open: boolean): void;
+  dir?: "ltr" | "rtl";
+  name?: string;
+  autoComplete?: string;
+  disabled?: boolean;
+  required?: boolean;
+  form?: string;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?(value: string): void;
+};
+
+type SelectProps = SelectRootProps &
   VariantProps<typeof triggerVariants> & {
     options: SelectOption[];
     placeholder?: string;
