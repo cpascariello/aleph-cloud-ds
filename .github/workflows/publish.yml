@@ -40,6 +40,20 @@ jobs:
         working-directory: packages/ds
         run: pnpm check:package
 
+      - name: Debug auth state
+        run: |
+          echo "--- npm version ---"
+          npm -v
+          echo "--- node version ---"
+          node -v
+          echo "--- npm config list ---"
+          npm config list
+          echo "--- npmrc files ---"
+          cat ~/.npmrc 2>/dev/null || echo "no ~/.npmrc"
+          cat .npmrc 2>/dev/null || echo "no ./.npmrc"
+          echo "--- NODE_AUTH_TOKEN set? ---"
+          if [ -z "${NODE_AUTH_TOKEN+x}" ]; then echo "NOT SET"; else echo "SET (length: ${#NODE_AUTH_TOKEN})"; fi
+
       - name: Publish to npm
         working-directory: packages/ds
-        run: npm publish --access public --registry https://registry.npmjs.org
+        run: npm publish --access public --verbose
