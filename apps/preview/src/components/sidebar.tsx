@@ -68,12 +68,12 @@ function NavLink({
 }: {
   item: NavItem;
   pathname: string;
-  onClick?: () => void | undefined;
+  onClick?: () => void;
 }) {
   return (
     <Link
       href={item.href}
-      onClick={onClick}
+      {...(onClick ? { onClick } : {})}
       className={`block rounded-md px-3 py-2 text-sm transition-colors ${
         pathname === item.href ? LINK_ACTIVE : LINK_IDLE
       }`}
