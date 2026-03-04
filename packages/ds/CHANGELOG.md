@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+### Changed
+
+- Verified end-to-end publish pipeline
+
 ### Added
 
 - Button component with 6 variants (primary, secondary, outline, text, destructive, warning), 4 sizes, loading state, icon slots, asChild polymorphism
